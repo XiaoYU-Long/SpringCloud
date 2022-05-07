@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.lhy</groupId>
+        <groupId>com.yu</groupId>
         <artifactId>spring-cloud-learning</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
