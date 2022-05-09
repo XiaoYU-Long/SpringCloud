@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>service-provider</name>
     <description>service-provider</description>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>com.yu</groupId>
