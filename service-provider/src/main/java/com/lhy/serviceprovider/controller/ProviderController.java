@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 服务提供者控制层
+ * feign控制层
  *
  * @author yu
  * @date 2022-05-09 9:55
