@@ -1,0 +1,17 @@
+server:
+  port: 8768
+
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    # 是否注册到 eureka
+    register-with-eureka: false
+    # 是否从eureka获取注册信息
+    fetch-registry: false
+    service-url:
+      defaultZone: http://peer1:8761/eureka/,http://peer3:8769/eureka/
+
+spring:
+  application:
+    name: eureka-server-peer2
