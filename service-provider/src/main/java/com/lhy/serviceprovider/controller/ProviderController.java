@@ -1,6 +1,7 @@
 package com.lhy.serviceprovider.controller;
 
 import brave.sampler.Sampler;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class ProviderController {
     }
 
     @RequestMapping("/hello")
+    @HystrixCommand(fallbackMethod = "helloError")
     public String hello(@RequestParam(value = "name", defaultValue = "dragon") String name) {
         return "hello " + name + ", I`m from port:" + port;
+    }
+
+    public String helloError(String name) {
+        return "hi," + name + ", sorry, error happens";
     }
 
     @RequestMapping("/call")
