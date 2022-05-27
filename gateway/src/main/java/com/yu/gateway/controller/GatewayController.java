@@ -1,5 +1,6 @@
 package com.yu.gateway.controller;
 
+import com.yu.gateway.filter.RequestTimeFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,12 @@ public class GatewayController {
                                 .setName("cmd")
                                 .setFallbackUri("forward:/fallback")))
                         .uri(uri))
+                // 自定义过滤器
+                .route(p -> p.path("/customer/**")
+                        .filters(f -> f.filter(new RequestTimeFilter()))
+                        .uri(uri + "/get")
+                        .order(0)
+                        .id("customer_filter_router"))
                 .build();
     }
 

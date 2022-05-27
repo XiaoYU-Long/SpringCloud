@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   profiles:
-    active: query_route
+    active: elapse_route
 
 
 ---
@@ -101,3 +101,48 @@ spring:
             - Query=key, value
           # - Query=key
   profiles: query_route
+
+
+---
+#AddRequestHeader GatewayFilter Factory
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: add_request_header_route
+          uri: http://httpbin.org:80/get
+          filters:
+            - AddRequestHeader=X-Request-Key, Value
+          predicates:
+            - After=2022-05-20T10:40:14.334+08:00[Asia/Shanghai]
+  profiles: add_request_header_route
+
+
+---
+#RewritePath GatewayFilter Factory
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: rewritepath_route
+          uri: http://httpbin.org:80/get
+          filters:
+            - RewritePath=/path/(?<segment>.*), /$\{segment}
+          predicates:
+            - Path=/path/**
+  profiles: rewritepath_route
+
+
+---
+#elapsed GatewayFilter Factory
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: elapse_route
+          uri: http://httpbin.org:80/get
+          filters:
+            - RequestTime=true
+          predicates:
+            - After=2022-05-20T10:40:14.334+08:00[Asia/Shanghai]
+  profiles: elapse_route
